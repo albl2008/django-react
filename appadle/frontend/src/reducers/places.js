@@ -1,4 +1,4 @@
-import { GET_PLACES } from '../actions/types';
+import { GET_PLACES, DELETE_PLACE, ADD_PLACE } from '../actions/types';
 
 
 const initialState = {
@@ -12,6 +12,16 @@ export default function(state=initialState, action){
             return {
                 ...state,
                 places: action.payload
+            }
+        case DELETE_PLACE:
+            return {
+                ...state,
+                places: state.places.filter(place => place.id !== action.payload)
+            };
+        case ADD_PLACE:
+            return {
+                ...state,
+                places: [...state.places,action.payload]
             }
             default:
                 return state;

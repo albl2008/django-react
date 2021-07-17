@@ -2,12 +2,14 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
-import { getPlaces } from '../../actions/places'
+import { getPlaces, deletePlace } from '../../actions/places'
 
 export class Places extends Component {
     static PropTypes = {
-        places: PropTypes.array.isRequired
-    }
+        places: PropTypes.array.isRequired,
+        getPlaces: PropTypes.func.isRequired,
+        deletePlace: PropTypes.func.isRequired
+    };
 
     componentDidMount(){
         this.props.getPlaces();
@@ -41,7 +43,7 @@ export class Places extends Component {
                              <td>{place.material}</td>
                              <td>{place.rating}/5</td>
                              <td>
-                                 <button className="m-1 btn btn-primary btn-sm"><i alt="Llamar" className="bi-whatsapp"></i> </button>
+                                 <button onClick={this.props.deletePlace.bind(this,place.id)} className="m-1 btn btn-danger btn-sm"><i alt="Llamar" className="bi-whatsapp"></i> </button>
                                  <button className="m-1 btn btn-primary btn-sm"><i alt="Ubicacion" className="bi-geo-alt"></i> </button>
                                  <button className="m-1 btn btn-primary btn-sm"><i alt="Reservar" className="bi-clock"></i></button>
                              </td>
@@ -60,4 +62,7 @@ const mapStateToProps = state => ({
     places: state.places.places
 });
 
-export default connect(mapStateToProps, { getPlaces })(Places);
+export default connect(
+    mapStateToProps, 
+    { getPlaces, deletePlace }
+    )(Places);
