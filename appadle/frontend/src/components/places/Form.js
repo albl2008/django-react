@@ -22,8 +22,16 @@ export class Form extends Component {
     onSubmit = e =>{
         e.preventDefault();
         const { name, tel, courtQty, material, rating, address } = this.state;
-        const place = { name, tel, courtQty, material, rating, address };
+        const place = ({ name, tel, courtQty, material, rating, address });
         this.props.addPlace(place);
+        this.setState({
+          name:'',
+          tel:'',
+          address:'',
+          rating:'',
+          courtQty:'',
+          material:''
+        })
     };
 
     render() {

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { getPlaces, deletePlace } from '../../actions/places'
 
 export class Places extends Component {
-    static PropTypes = {
+    static propTypes = {
         places: PropTypes.array.isRequired,
         getPlaces: PropTypes.func.isRequired,
         deletePlace: PropTypes.func.isRequired
